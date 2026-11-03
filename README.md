@@ -16,7 +16,6 @@ pnpm add pangu-steel-homepage-test
 import {
   PanguSteelHomepage
 } from 'pangu-steel-homepage-test'
-import 'pangu-steel-homepage-test/style.css'
 </script>
 
 <template>
@@ -28,7 +27,6 @@ import 'pangu-steel-homepage-test/style.css'
 
 ```ts
 import PanguSteelHomepage from 'pangu-steel-homepage-test'
-import 'pangu-steel-homepage-test/style.css'
 ```
 
 ## 在 Nuxt 3 中使用
@@ -42,7 +40,6 @@ Nuxt 页面中的用法与 Vue 3 相同。组件没有浏览器专属的初始�
 import {
   PanguSteelHomepage
 } from 'pangu-steel-homepage-test'
-import 'pangu-steel-homepage-test/style.css'
 </script>
 
 <template>
@@ -81,7 +78,8 @@ pnpm pack:check
 ```
 
 发布产物包含 `dist/index.js`、`dist/index.d.ts` 和 `dist/style.css`。Nuxt
-预览源码不会进入 npm 包。
+预览源码不会进入 npm 包。组件样式会在导入组件时自动加载，使用方不需要
+额外导入 CSS。
 
 ## 发布
 

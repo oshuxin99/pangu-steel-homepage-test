@@ -11,6 +11,20 @@ export default defineConfig({
   plugins: [
     vue(),
     {
+      name: 'inject-component-styles',
+      generateBundle(_options, bundle) {
+        const entry = Object.values(bundle).find(
+          output => output.type === 'chunk' && output.isEntry
+        )
+
+        if (!entry) {
+          this.error('Unable to find the component entry chunk.')
+        }
+
+        entry.code = `import './style.css';\n${entry.code}`
+      }
+    },
+    {
       name: 'copy-component-types',
       closeBundle() {
         copyFileSync(typesSource, typesOutput)
