@@ -1,8 +1,20 @@
 {
   "name": "pangu-steel-homepage-test",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "基于 Nuxt 3 和 Vue 3 的盘古钢铁首页模板",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./style.css": "./dist/style.css",
+    "./package.json": "./package.json"
+  },
   "author": "oshuxin99",
   "repository": {
     "type": "git",
@@ -20,11 +32,11 @@
     "steel"
   ],
   "license": "UNLICENSED",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
-    "app.vue",
-    "pages",
-    "public",
-    "nuxt.config.ts",
+    "dist",
     "README.md"
   ],
   "engines": {
@@ -35,19 +47,26 @@
     "access": "public"
   },
   "scripts": {
-    "build": "nuxt build",
+    "build": "pnpm build:lib",
+    "build:lib": "vite build --config vite.lib.config.ts",
+    "build:preview": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "pack:check": "pnpm pack --dry-run",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build:lib"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "@element-plus/nuxt": "1.1.5",
+    "@vitejs/plugin-vue": "^6.0.10",
     "element-plus": "^2.14.7",
     "nuxt": "^3.21.11",
+    "vite": "^7.3.7",
     "vue": "^3.5.40",
     "vue-router": "^5.2.0"
   }

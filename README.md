@@ -1,49 +1,90 @@
-# 盘古钢铁首页模板
+# 盘古钢铁首页组件
 
-当前包的本地首页预览，不包含工作台、侧栏或顶部导航。页面代码和资源全部位于本项目中，不依赖其他前端项目或外部预览服务。
+一个可直接被 Vue 3 或 Nuxt 3 项目引入的工业钢铁首页组件。包内同时保留了
+Nuxt 本地预览页，方便开发时检查视觉效果。
 
-## 本地预览
+## 安装
 
-安装依赖后启动开发服务器：
+```bash
+pnpm add pangu-steel-homepage-test
+```
+
+## 在 Vue 3 中使用
+
+```vue
+<script setup lang="ts">
+import {
+  PanguSteelHomepage
+} from 'pangu-steel-homepage-test'
+import 'pangu-steel-homepage-test/style.css'
+</script>
+
+<template>
+  <PanguSteelHomepage />
+</template>
+```
+
+组件也提供默认导出：
+
+```ts
+import PanguSteelHomepage from 'pangu-steel-homepage-test'
+import 'pangu-steel-homepage-test/style.css'
+```
+
+## 在 Nuxt 3 中使用
+
+Nuxt 页面中的用法与 Vue 3 相同。组件没有浏览器专属的初始化逻辑，可以直接参与
+服务端渲染。
+
+```vue
+<!-- pages/index.vue -->
+<script setup lang="ts">
+import {
+  PanguSteelHomepage
+} from 'pangu-steel-homepage-test'
+import 'pangu-steel-homepage-test/style.css'
+</script>
+
+<template>
+  <PanguSteelHomepage />
+</template>
+```
+
+产品区域的锚点 ID 默认为 `products`，可以通过 `products-id` 修改：
+
+```vue
+<PanguSteelHomepage products-id="steel-products" />
+```
+
+组件颜色通过 CSS 变量控制。使用方可以覆盖 `--ink`、`--rust`、`--paper`
+等变量来调整主题。
+
+## 本地开发
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-浏览器打开：
+浏览器打开 `http://localhost:3000` 查看完整首页。
 
-```text
-http://localhost:3000
-```
-
-## 构建与预览产物
+打包 npm 组件：
 
 ```bash
 pnpm build
-pnpm preview
 ```
 
-生产构建和本地开发都只使用当前包内的代码与依赖。
-
-## 通过 GitHub Actions 发布到 npm
-
-当前包已配置为公开 npm 包，发布内容仅包含首页模板源码、公共资源和 Nuxt 配置。
-
-第一次发布前，在 GitHub 仓库的 `Settings > Secrets and variables > Actions`
-中添加名为 `NPM_TOKEN` 的 repository secret。该令牌需要拥有此包的发布权限；
-由于账号启用了 2FA，首次引导发布时需要使用允许发布操作的 Granular Access Token。
-
-完成配置后，可以在 GitHub 仓库的 `Actions > Publish to npm` 页面手动运行工作流。
-也可以推送与 `package.json` 版本一致的标签来触发发布：
+检查最终发布内容：
 
 ```bash
-git tag v0.0.1
-git push origin v0.0.1
+pnpm pack:check
 ```
 
-发布前工作流会自动安装依赖、执行生产构建并生成 npm provenance。发布新版本时，
-先更新 `package.json` 中的 `version`，再创建对应的 `v*` 标签。
+发布产物包含 `dist/index.js`、`dist/index.d.ts` 和 `dist/style.css`。Nuxt
+预览源码不会进入 npm 包。
 
-首次发布完成后，可以在 npm 包设置中改用 Trusted Publishing，将发布权限
-绑定到本仓库的 `Publish to npm` 工作流，后续即可移除长期有效的 `NPM_TOKEN`。
+## 发布
+
+每次发布前先更新 `package.json` 中的 `version`，再推送对应的 `v*` 标签，
+或在 GitHub Actions 中手动运行 `Publish to npm`。工作流需要配置
+`NPM_TOKEN`，并会在发布前自动执行组件构建。
