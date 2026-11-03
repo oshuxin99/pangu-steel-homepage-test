@@ -1,6 +1,6 @@
 {
   "name": "pangu-steel-homepage-test",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "基于 Nuxt 3 和 Vue 3 的盘古钢铁首页模板",
   "type": "module",
   "main": "./dist/index.js",
@@ -49,7 +49,8 @@
   },
   "scripts": {
     "build": "pnpm build:lib",
-    "build:lib": "vite build --config vite.lib.config.ts",
+    "prepare:types": "nuxt prepare",
+    "build:lib": "pnpm prepare:types && vite build --config vite.lib.config.ts",
     "build:preview": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
