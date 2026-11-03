@@ -27,6 +27,16 @@ async function findCssFiles(directory) {
 }
 
 try {
+  const packageJson = JSON.parse(
+    await readFile(join(projectRoot, 'package.json'), 'utf8')
+  )
+
+  if (packageJson.scripts?.postinstall) {
+    throw new Error(
+      'The package must not run postinstall scripts in consumer projects.'
+    )
+  }
+
   const server = await createServer({
     root: projectRoot,
     configFile: false,
