@@ -53,6 +53,17 @@ import {
 <PanguSteelHomepage products-id="steel-products" />
 ```
 
+组件内所有公开类名默认使用 `pangu-steel-` 前缀，例如
+`pangu-steel-homepage`、`pangu-steel-brand` 和 `pangu-steel-button`。
+可以通过 `class-prefix` 修改为项目约定的公共仓库前缀：
+
+```vue
+<PanguSteelHomepage class-prefix="acme-steel" />
+```
+
+对应类名会变为 `acme-steel-homepage`、`acme-steel-brand` 等。内部样式使用
+独立的 CSS Modules 类名，因此切换前缀不会影响组件样式。
+
 组件颜色通过 CSS 变量控制。使用方可以覆盖 `--ink`、`--rust`、`--paper`
 等变量来调整主题。
 

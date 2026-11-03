@@ -1,6 +1,7 @@
 import type { DefineComponent } from 'vue'
 
 export interface PanguSteelHomepageProps {
+  classPrefix?: string
   productsId?: string
 }
 

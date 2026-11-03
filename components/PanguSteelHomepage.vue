@@ -1,38 +1,38 @@
 <template>
-  <div class="homepage">
-    <header class="masthead">
-      <div class="brand">
-        <span class="brand__symbol">
+  <div :class="cx('homepage')">
+    <header :class="cx('masthead')">
+      <div :class="cx('brand')">
+        <span :class="cx('brand__symbol')">
           <i />
           <i />
           <i />
         </span>
-        <div class="brand__name">
+        <div :class="cx('brand__name')">
           <strong>盘古钢铁</strong>
           <span>PANGU STEEL</span>
         </div>
       </div>
-      <p class="masthead__note">自 2008 年深耕钢材制造</p>
+      <p :class="cx('masthead__note')">自 2008 年深耕钢材制造</p>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="hero__copy">
+      <section :class="cx('hero')">
+        <div :class="cx('hero__copy')">
           <h1>把稳定的钢材，<br>交到每一道工序手上。</h1>
           <p>
             从热轧卷板到高强结构钢，我们以稳定的材料性能、可追溯的生产流程
             和准时交付，为制造企业提供可靠的底层材料。
           </p>
-          <div class="hero__actions">
+          <div :class="cx('hero__actions')">
             <button
-              class="button button--solid"
+              :class="cx('button', 'button--solid')"
               type="button"
               @click="scrollToProducts"
             >
               查看产品体系
             </button>
             <button
-              class="button button--quiet"
+              :class="cx('button', 'button--quiet')"
               type="button"
             >
               获取产品手册
@@ -41,27 +41,27 @@
         </div>
 
         <div
-          class="hero__visual"
+          :class="cx('hero__visual')"
           aria-hidden="true"
         >
-          <div class="measure measure--top">
+          <div :class="cx('measure', 'measure--top')">
             <span>1250</span>
             <i />
           </div>
-          <div class="measure measure--side">
+          <div :class="cx('measure', 'measure--side')">
             <span>3.0</span>
             <i />
           </div>
-          <div class="coil">
-            <span class="coil__face">
-              <span class="coil__edge" />
-              <span class="coil__core" />
+          <div :class="cx('coil')">
+            <span :class="cx('coil__face')">
+              <span :class="cx('coil__edge')" />
+              <span :class="cx('coil__core')" />
             </span>
           </div>
-          <span class="hero__visual-note">热轧卷板 · Q235B</span>
+          <span :class="cx('hero__visual-note')">热轧卷板 · Q235B</span>
         </div>
 
-        <div class="hero__stats">
+        <div :class="cx('hero__stats')">
           <div
             v-for="stat in stats"
             :key="stat.label"
@@ -74,9 +74,9 @@
 
       <section
         :id="productsId"
-        class="products"
+        :class="cx('products')"
       >
-        <div class="section-intro">
+        <div :class="cx('section-intro')">
           <div>
             <h2>材料，不止于标准。</h2>
           </div>
@@ -86,16 +86,16 @@
           </p>
         </div>
 
-        <div class="product-list">
+        <div :class="cx('product-list')">
           <article
             v-for="(product, index) in products"
             :key="product.name"
-            class="product-row"
+            :class="cx('product-row')"
           >
-            <span class="product-row__index">{{ String(index + 1).padStart(2, '0') }}</span>
+            <span :class="cx('product-row__index')">{{ String(index + 1).padStart(2, '0') }}</span>
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
-            <div class="product-row__specs">
+            <div :class="cx('product-row__specs')">
               <span
                 v-for="spec in product.specs"
                 :key="spec"
@@ -104,44 +104,44 @@
               </span>
             </div>
             <span
-              class="product-row__line"
+              :class="cx('product-row__line')"
               :style="{ '--line-width': product.lineWidth }"
             />
           </article>
         </div>
       </section>
 
-      <section class="capability">
+      <section :class="cx('capability')">
         <div
-          class="capability__visual"
+          :class="cx('capability__visual')"
           aria-hidden="true"
         >
-          <span class="sheet sheet--back" />
-          <span class="sheet sheet--middle" />
-          <span class="sheet sheet--front">
+          <span :class="cx('sheet', 'sheet--back')" />
+          <span :class="cx('sheet', 'sheet--middle')" />
+          <span :class="cx('sheet', 'sheet--front')">
             <i />
             <i />
             <i />
           </span>
-          <div class="capability__stamp">
+          <div :class="cx('capability__stamp')">
             <strong>99.97<small>%</small></strong>
             <span>交付合格率</span>
           </div>
         </div>
 
-        <div class="capability__content">
+        <div :class="cx('capability__content')">
           <h2>一卷钢的稳定，<br>来自整条产线的确定性。</h2>
           <p>
             我们持续优化原料、轧制、退火与质检之间的工艺衔接，
             用清晰的过程控制换来更稳定的成品表现。
           </p>
 
-          <ol class="process">
+          <ol :class="cx('process')">
             <li
               v-for="(item, index) in process"
               :key="item.title"
             >
-              <span class="process__number">{{ String(index + 1).padStart(2, '0') }}</span>
+              <span :class="cx('process__number')">{{ String(index + 1).padStart(2, '0') }}</span>
               <div>
                 <strong>{{ item.title }}</strong>
                 <p>{{ item.description }}</p>
@@ -151,33 +151,33 @@
         </div>
       </section>
 
-      <section class="statement">
-        <p class="statement__quote">
+      <section :class="cx('statement')">
+        <p :class="cx('statement__quote')">
           “钢材是工业的骨架。我们能做的，是让这份骨架更稳定、更耐久，
           也更容易被信任。”
         </p>
-        <div class="statement__source">
-          <span class="statement__avatar">周</span>
+        <div :class="cx('statement__source')">
+          <span :class="cx('statement__avatar')">周</span>
           <div>
             <strong>周启明</strong>
             <span>生产制造中心负责人</span>
           </div>
         </div>
         <span
-          class="statement__watermark"
+          :class="cx('statement__watermark')"
           aria-hidden="true"
         >
           钢
         </span>
       </section>
 
-      <section class="closing">
+      <section :class="cx('closing')">
         <div>
           <h2>让下一次采购，从一份更明确的材料方案开始。</h2>
           <p>告诉我们你的牌号、规格和应用场景，我们会尽快提供匹配建议。</p>
         </div>
         <button
-          class="button button--light"
+          :class="cx('button', 'button--light')"
           type="button"
         >
           获取材料方案
@@ -185,14 +185,14 @@
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="brand brand--footer">
-        <span class="brand__symbol">
+    <footer :class="cx('footer')">
+      <div :class="cx('brand', 'brand--footer')">
+        <span :class="cx('brand__symbol')">
           <i />
           <i />
           <i />
         </span>
-        <div class="brand__name">
+        <div :class="cx('brand__name')">
           <strong>盘古钢铁</strong>
           <span>PANGU STEEL</span>
         </div>
@@ -204,15 +204,33 @@
 </template>
 
 <script setup lang="ts">
+import { computed, useCssModule } from 'vue'
+
 defineOptions({
   name: 'PanguSteelHomepage'
 })
 
 const props = withDefaults(defineProps<{
+  classPrefix?: string
   productsId?: string
 }>(), {
+  classPrefix: 'pangu-steel',
   productsId: 'products'
 })
+
+const cssModule = useCssModule()
+const resolvedClassPrefix = computed(() => {
+  const prefix = props.classPrefix.trim().replace(/-+$/, '')
+
+  return prefix || 'pangu-steel'
+})
+
+function cx(...classNames: string[]) {
+  return classNames.flatMap((className) => [
+    cssModule[className],
+    `${resolvedClassPrefix.value}-${className}`
+  ])
+}
 
 const currentYear = new Date().getFullYear()
 
@@ -278,7 +296,7 @@ function scrollToProducts() {
 }
 </script>
 
-<style scoped>
+<style module>
 .homepage {
   --paper: #eef1f0;
   --paper-deep: #dfe4e2;
