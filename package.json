@@ -1,6 +1,6 @@
 {
   "name": "pangu-steel-homepage-test",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "基于 Nuxt 3 和 Vue 3 的盘古钢铁首页模板",
   "type": "module",
   "main": "./dist/index.js",
@@ -12,6 +12,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./nuxt": {
+      "types": "./dist/nuxt.d.ts",
+      "import": "./dist/nuxt.js",
+      "default": "./dist/nuxt.js"
     },
     "./style.css": "./dist/style.css",
     "./package.json": "./package.json"
@@ -59,6 +64,9 @@
   },
   "peerDependencies": {
     "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.21.11"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.2",

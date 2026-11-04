@@ -5,6 +5,8 @@ import { defineConfig } from 'vite'
 
 const typesSource = fileURLToPath(new URL('./index.d.ts', import.meta.url))
 const typesOutput = fileURLToPath(new URL('./dist/index.d.ts', import.meta.url))
+const moduleTypesSource = fileURLToPath(new URL('./nuxt.d.ts', import.meta.url))
+const moduleTypesOutput = fileURLToPath(new URL('./dist/nuxt.d.ts', import.meta.url))
 
 export default defineConfig({
   publicDir: false,
@@ -14,7 +16,9 @@ export default defineConfig({
       name: 'inject-component-styles',
       generateBundle(_options, bundle) {
         const entry = Object.values(bundle).find(
-          output => output.type === 'chunk' && output.isEntry
+          output => output.type === 'chunk'
+            && output.isEntry
+            && output.name === 'index'
         )
 
         if (!entry) {
@@ -25,9 +29,10 @@ export default defineConfig({
       }
     },
     {
-      name: 'copy-component-types',
+      name: 'copy-package-types',
       closeBundle() {
         copyFileSync(typesSource, typesOutput)
+        copyFileSync(moduleTypesSource, moduleTypesOutput)
       }
     }
   ],
@@ -35,12 +40,15 @@ export default defineConfig({
     target: 'es2020',
     cssCodeSplit: false,
     lib: {
-      entry: fileURLToPath(new URL('./index.ts', import.meta.url)),
+      entry: {
+        index: fileURLToPath(new URL('./index.ts', import.meta.url)),
+        nuxt: fileURLToPath(new URL('./nuxt.ts', import.meta.url))
+      },
       formats: ['es'],
-      fileName: () => 'index.js'
+      fileName: (_format, entryName) => `${entryName}.js`
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', '@nuxt/kit', 'node:path', 'node:url'],
       output: {
         assetFileNames: 'style.css'
       }

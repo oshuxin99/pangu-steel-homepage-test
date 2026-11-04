@@ -37,6 +37,19 @@ try {
     )
   }
 
+  const {
+    default: homepageModule,
+    panguSteelHomepageModule
+  } = await import('pangu-steel-homepage-test/nuxt')
+  const moduleMeta = await homepageModule.getMeta?.()
+
+  if (
+    homepageModule !== panguSteelHomepageModule
+    || moduleMeta?.name !== 'pangu-steel-homepage'
+  ) {
+    throw new Error('The Nuxt module entry is invalid.')
+  }
+
   const server = await createServer({
     root: projectRoot,
     configFile: false,
@@ -111,7 +124,7 @@ try {
     throw new Error('Component styles were not bundled automatically.')
   }
 
-  console.log('Component styles and public class prefixes are verified.')
+  console.log('Component, Nuxt module entry and package styles are verified.')
 } finally {
   await rm(outputDirectory, { recursive: true, force: true })
 }

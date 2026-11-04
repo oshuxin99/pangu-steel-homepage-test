@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@nuxt/kit':
+        specifier: ^3.21.11
+        version: 3.21.11(magicast@0.5.5)
     devDependencies:
       '@element-plus/icons-vue':
         specifier: ^2.3.2

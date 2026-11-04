@@ -31,8 +31,42 @@ import PanguSteelHomepage from 'pangu-steel-homepage-test'
 
 ## 在 Nuxt 3 中使用
 
-Nuxt 页面中的用法与 Vue 3 相同。组件没有浏览器专属的初始化逻辑，可以直接参与
-服务端渲染。
+通过 Nuxt Module 自动注册组件：
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['pangu-steel-homepage-test/nuxt']
+})
+```
+
+注册后可以直接在页面中使用，无需手动导入：
+
+```vue
+<!-- pages/index.vue -->
+<template>
+  <PanguSteelHomepage />
+</template>
+```
+
+可以修改自动注册的组件名称，或将组件全局注册：
+
+```ts
+export default defineNuxtConfig({
+  modules: [
+    [
+      'pangu-steel-homepage-test/nuxt',
+      {
+        componentName: 'SteelHomepage',
+        global: false
+      }
+    ]
+  ]
+})
+```
+
+也可以跳过 Module，像普通 Vue 组件一样手动导入。组件没有浏览器专属的初始化
+逻辑，可以直接参与服务端渲染。
 
 ```vue
 <!-- pages/index.vue -->
@@ -88,9 +122,9 @@ pnpm build
 pnpm pack:check
 ```
 
-发布产物包含 `dist/index.js`、`dist/index.d.ts` 和 `dist/style.css`。Nuxt
-预览源码不会进入 npm 包。组件样式会在导入组件时自动加载，使用方不需要
-额外导入 CSS。
+发布产物包含 Vue 组件入口 `dist/index.js`、Nuxt Module 入口
+`dist/nuxt.js`、对应类型声明和 `dist/style.css`。Nuxt 预览源码不会进入
+npm 包。组件样式会在导入组件时自动加载，使用方不需要额外导入 CSS。
 
 ## 发布
 
